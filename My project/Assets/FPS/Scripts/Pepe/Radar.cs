@@ -44,7 +44,7 @@ namespace Unity.FPS.Pepe
 
                 Vector3 directionVector = element.Key.transform.position - m_PlayerTransform.position;
 
-                widthDifference = (directionVector.z) * HeightDifferenceMultiplier;
+                widthDifference = (directionVector.z) * HeightDifferenceMultiplier *-1;
                 widthDifference = Mathf.Clamp(widthDifference, - CompasRect.rect.width / 2 * CompasMarginRatio,
                     CompasRect.rect.width / 2 * CompasMarginRatio);
 
