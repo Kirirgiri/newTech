@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.FPS.Game;
 using Unity.FPS.Gameplay;
@@ -14,7 +13,9 @@ namespace Unity.FPS.Pepe
         public float DistanceMinScale = 50f;
         public float CompasMarginRatio = 0.8f;
 
+        [Tooltip("UI for Radar screen")]
         public RectTransform MarkerDirectionPrefab;
+        public RadarMarker[] RadarMarkerPrefab;
 
         Transform m_PlayerTransform;
         Dictionary<Transform, RadarMarker> m_EnemyDictionary = new Dictionary<Transform, RadarMarker>();
@@ -55,18 +56,18 @@ namespace Unity.FPS.Pepe
                 distanceRatio = directionVector.magnitude / DistanceMinScale;
                 distanceRatio = Mathf.Clamp01(distanceRatio);
 
-                if(Mathf.Abs(directionVector.x)<DistanceMinScale)// && Mathf.Abs(widthDifference)<MinScale)
+                if(Mathf.Abs(directionVector.x)<DistanceMinScale)
                 {
                     element.Value.CanvasGroup.alpha = 1;
                     element.Value.CanvasGroup.transform.localPosition = new Vector2(widthDifference+m_WidthMultiplier,
                         heightDifference + m_HeightOffset);
                     element.Value.CanvasGroup.transform.localScale =
-                        Vector3.one * Mathf.Lerp(1, MinScale, distanceRatio); //important======================================
+                        Vector3.one * Mathf.Lerp(1, MinScale, distanceRatio);
                 }else{
                     element.Value.CanvasGroup.alpha = 0;
                 }
             }
-            MarkerDirectionPrefab.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, m_PlayerTransform.rotation.y*220);//so the UI player would face the same direction as in reality
+            MarkerDirectionPrefab.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, m_PlayerTransform.rotation.y*250);//so the UI player would face the same direction as in reality
         }
 
         public void RegisterCompassElement(Transform element, RadarMarker marker)
@@ -81,6 +82,12 @@ namespace Unity.FPS.Pepe
             if (m_EnemyDictionary.TryGetValue(element, out RadarMarker marker) && marker.CanvasGroup != null)
                 Destroy(marker.CanvasGroup.gameObject);
             m_EnemyDictionary.Remove(element);
+        }
+
+        public void AddRadarMarker(Transform element)
+        {
+            var markerInstance = Instantiate(RadarMarkerPrefab[0]);
+            RegisterCompassElement(element,RadarMarkerPrefab[0]);
         }
     }
 }

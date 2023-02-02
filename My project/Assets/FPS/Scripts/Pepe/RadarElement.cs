@@ -8,9 +8,6 @@ namespace Unity.FPS.Pepe
         [Tooltip("The marker on the compass for this element")]
         public RadarMarker CompassMarkerPrefab;
 
-        [Tooltip("Text override for the marker, if it's a direction")]
-        public string TextDirection;
-
         Radar m_Compass;
 
         void Awake()
@@ -19,8 +16,6 @@ namespace Unity.FPS.Pepe
             DebugUtility.HandleErrorIfNullFindObject<UnityEngine.Compass, RadarElement>(m_Compass, this);
 
             var markerInstance = Instantiate(CompassMarkerPrefab);
-
-            markerInstance.Initialize(this, TextDirection);
             m_Compass.RegisterCompassElement(transform, markerInstance);
         }
 
