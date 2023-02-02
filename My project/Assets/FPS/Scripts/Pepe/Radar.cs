@@ -14,7 +14,7 @@ namespace Unity.FPS.Pepe
         public float DistanceMinScale = 50f;
         public float CompasMarginRatio = 0.8f;
 
-        public GameObject MarkerDirectionPrefab;
+        public RectTransform MarkerDirectionPrefab;
 
         Transform m_PlayerTransform;
         Dictionary<Transform, RadarMarker> m_EnemyDictionary = new Dictionary<Transform, RadarMarker>();
@@ -66,6 +66,7 @@ namespace Unity.FPS.Pepe
                     element.Value.CanvasGroup.alpha = 0;
                 }
             }
+            MarkerDirectionPrefab.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, m_PlayerTransform.rotation.y*220);//so the UI player would face the same direction as in reality
         }
 
         public void RegisterCompassElement(Transform element, RadarMarker marker)
