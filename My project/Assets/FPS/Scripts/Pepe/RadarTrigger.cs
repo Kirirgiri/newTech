@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using Unity.FPS.Pepe;
 
 
 public class RadarTrigger : MonoBehaviour
 {
-    [SerializeField] private UnityEvent detectingTargets;
-    [SerializeField] private List<GameObject> targets;
+    public RadarElement element;
+    private List<GameObject> registeredTargets = new List<GameObject>();
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
     {
-        for(var i=0;i<targets.Count;i++)
+        if(other.gameObject.tag == "target")
         {
-            if(other == targets[i])
-            {
-                Debug.Log("FSDGDSGSDg");
-            }
+            other.GetComponent<RadarElement>().OnCreate();
         }
+    }
+
+    void OnTriggerLeave(Collider other)
+    {
+        other.GetComponent<RadarElement>().OnDestroy();
     }
 }

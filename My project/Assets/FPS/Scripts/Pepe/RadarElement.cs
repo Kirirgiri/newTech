@@ -9,19 +9,29 @@ namespace Unity.FPS.Pepe
         public RadarMarker CompassMarkerPrefab;
 
         Radar m_Compass;
+        private bool awoken;
 
         void Awake()
         {
             m_Compass = FindObjectOfType<Radar>();
             DebugUtility.HandleErrorIfNullFindObject<UnityEngine.Compass, RadarElement>(m_Compass, this);
 
-            var markerInstance = Instantiate(CompassMarkerPrefab);
-            m_Compass.RegisterCompassElement(transform, markerInstance);
         }
 
-        void OnDestroy()
+        public void OnDestroy()
         {
             m_Compass.UnregisterCompassElement(transform);
+            awoken = false;
+        }
+
+        public void OnCreate()
+        {
+            if(!awoken)
+            {
+                var markerInstance = Instantiate(CompassMarkerPrefab);
+                m_Compass.RegisterCompassElement(transform, markerInstance);
+                awoken = true;
+            }
         }
     }
 }
