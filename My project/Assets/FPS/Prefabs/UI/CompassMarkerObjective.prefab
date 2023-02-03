@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5587066761853311987}
   - component: {fileID: 4766474029067603892}
   - component: {fileID: 5727903887428834470}
+  - component: {fileID: 4985310851570611987}
   m_Layer: 5
   m_Name: CompassMarkerObjective
   m_TagString: Untagged
@@ -108,3 +109,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 1
+--- !u!114 &4985310851570611987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196493596265531283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92192955bb7d8a4bb5ae19a4341f0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainImage: {fileID: 4766474029067603892}
+  CanvasGroup: {fileID: 5727903887428834470}
+  DefaultColor: {r: 0, g: 0, b: 0, a: 0}
+  AltColor: {r: 0, g: 1, b: 0.7607844, a: 0}

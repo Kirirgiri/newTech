@@ -6,7 +6,6 @@ namespace Unity.FPS.Pepe
     public class RadarElement : MonoBehaviour
     {
         [Tooltip("The marker on the compass for this element")]
-        public RadarMarker CompassMarkerPrefab;
 
         Radar m_Compass;
         private bool awoken;
@@ -28,7 +27,19 @@ namespace Unity.FPS.Pepe
         {
             if(!awoken)
             {
-                var markerInstance = Instantiate(CompassMarkerPrefab);
+                var i = 0;
+                //var markerInstance = Instantiate(CompassMarkerPrefab);
+                switch (tag)
+                {
+                    case "target":
+                    i = 0;
+                    break;
+
+                    case "pickups":
+                    i=1;
+                    break;
+                }
+                var markerInstance = Instantiate(m_Compass.markersPrefabs[i]);
                 m_Compass.RegisterCompassElement(transform, markerInstance);
                 awoken = true;
             }

@@ -18,7 +18,7 @@ namespace Unity.FPS.Pepe
         public Color AltColor;
         EnemyController m_EnemyController;
 
-        public void Initialize(RadarElement compassElement, string textDirection)
+        public void Initialize(RadarElement compassElement)
         {
             m_EnemyController = compassElement.transform.GetComponent<EnemyController>();
 

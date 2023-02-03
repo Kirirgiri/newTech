@@ -15,9 +15,10 @@ namespace Unity.FPS.Pepe
 
         [Tooltip("UI for Radar screen")]
         public RectTransform MarkerDirectionPrefab;
+        public RadarMarker[] markersPrefabs;
 
         Transform m_PlayerTransform;
-        Dictionary<Transform, RadarMarker> m_EnemyDictionary = new Dictionary<Transform, RadarMarker>();
+        Dictionary<Transform, RadarMarker> m_TargetDictionary = new Dictionary<Transform, RadarMarker>();
 
         float m_WidthMultiplier;
         float m_HeightOffset;
@@ -36,7 +37,7 @@ namespace Unity.FPS.Pepe
         void Update()
         {
            // this is all very WIP, and needs to be reworked
-            foreach (var element in m_EnemyDictionary)
+            foreach (var element in m_TargetDictionary)
             {
                 float distanceRatio = 1;
                 float heightDifference = 0;
@@ -66,21 +67,21 @@ namespace Unity.FPS.Pepe
                     element.Value.CanvasGroup.alpha = 0;
                 }
             }
-            MarkerDirectionPrefab.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, m_PlayerTransform.rotation.y+250);//so the UI player would face the same direction as in reality
+            MarkerDirectionPrefab.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, m_PlayerTransform.rotation.y*90+180);//so the UI player would face the same direction as in reality
         }
 
         public void RegisterCompassElement(Transform element, RadarMarker marker)
         {
             marker.transform.SetParent(CompasRect);
 
-            m_EnemyDictionary.Add(element, marker);
+            m_TargetDictionary.Add(element, marker);
         }
 
         public void UnregisterCompassElement(Transform element)
         {
-            if (m_EnemyDictionary.TryGetValue(element, out RadarMarker marker) && marker.CanvasGroup != null)
+            if (m_TargetDictionary.TryGetValue(element, out RadarMarker marker) && marker.CanvasGroup != null)
                 Destroy(marker.CanvasGroup.gameObject);
-            m_EnemyDictionary.Remove(element);
+            m_TargetDictionary.Remove(element);
         }
     }
 }
