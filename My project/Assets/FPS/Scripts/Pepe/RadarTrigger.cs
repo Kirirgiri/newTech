@@ -6,7 +6,7 @@ using Unity.FPS.Pepe;
 
 public class RadarTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // adds targets to the radar directory
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "target" || other.gameObject.tag == "pickups")

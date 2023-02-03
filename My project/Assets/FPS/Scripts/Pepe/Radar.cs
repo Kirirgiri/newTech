@@ -36,7 +36,7 @@ namespace Unity.FPS.Pepe
 
         void Update()
         {
-           // this is all very WIP, and needs to be reworked
+           // changed the axises to make it look like a topview radar
             foreach (var element in m_TargetDictionary)
             {
                 float distanceRatio = 1;
@@ -66,7 +66,13 @@ namespace Unity.FPS.Pepe
                 }else{
                     element.Value.CanvasGroup.alpha = 0;
                 }
+                if(Mathf.Abs(directionVector.x)<DistanceMinScale/2)
+                {
+                    
+                }
+                
             }
+            //added rotation to the player dot as it would be confusing for the player once they rotate
             MarkerDirectionPrefab.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, m_PlayerTransform.rotation.y*90+180);//so the UI player would face the same direction as in reality
         }
 

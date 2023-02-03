@@ -28,7 +28,7 @@ namespace Unity.FPS.Pepe
             if(!awoken)
             {
                 var i = 0;
-                //var markerInstance = Instantiate(CompassMarkerPrefab);
+                //depending on the tag, the dots will have different colors on radar screen
                 switch (tag)
                 {
                     case "target":

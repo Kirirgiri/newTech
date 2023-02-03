@@ -6,6 +6,7 @@ namespace Unity.FPS.Pepe
 {
     public class RadarMarker : MonoBehaviour
     {
+        //this script serves only for changing colors
         [Tooltip("Main marker image")] public Image MainImage;
 
         [Tooltip("Canvas group for the marker")]
@@ -18,6 +19,7 @@ namespace Unity.FPS.Pepe
         public Color AltColor;
         EnemyController m_EnemyController;
 
+        //changing the color of the dot based whether the enemy detected the target
         public void Initialize(RadarElement compassElement)
         {
             m_EnemyController = compassElement.transform.GetComponent<EnemyController>();
